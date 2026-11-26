@@ -1,36 +1,145 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:AppFinalAv4A.Features.auth.Presentation.screens"
              x:Class="AppFinalAv4A.Features.auth.Presentation.screens.LoginScreen"
-             Title="Iniciar sesión">
+             x:DataType="vm:LoginViewModel"
+             Shell.NavBarIsVisible="False"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White">
 
-    <VerticalStackLayout Padding="24" Spacing="20" VerticalOptions="Center">
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="#0A6CD1"
+                                   StatusBarStyle="LightContent" />
+    </ContentPage.Behaviors>
 
-    
-        <VerticalStackLayout Spacing="16" IsVisible="{Binding IsLoggedOut}">
-            <Label Text="Bienvenido" FontSize="28" HorizontalOptions="Center" />
+    <Grid RowDefinitions="300,*,Auto">
 
-            <Button Text="Continuar con Google"
-                    Command="{Binding SignInCommand}"
-                    IsEnabled="{Binding IsNotBusy}" />
+        <Border Grid.Row="0"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 0,0,44,44">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#1E86E8" Offset="0.0" />
+                    <GradientStop Color="#0A6CD1" Offset="0.55" />
+                    <GradientStop Color="#0852A6" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
 
-            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+            <Grid>
+                <Ellipse Fill="White" Opacity="0.07"
+                         WidthRequest="240" HeightRequest="240"
+                         HorizontalOptions="Start" VerticalOptions="Start"
+                         Margin="-90,-90,0,0" />
+                <Ellipse Fill="White" Opacity="0.06"
+                         WidthRequest="180" HeightRequest="180"
+                         HorizontalOptions="End" VerticalOptions="End"
+                         Margin="0,0,-60,-50" />
+                <Ellipse Fill="White" Opacity="0.10"
+                         WidthRequest="14" HeightRequest="14"
+                         HorizontalOptions="End" VerticalOptions="Start"
+                         Margin="0,70,48,0" />
+                <Ellipse Fill="White" Opacity="0.14"
+                         WidthRequest="8" HeightRequest="8"
+                         HorizontalOptions="Start" VerticalOptions="End"
+                         Margin="36,0,0,70" />
+            </Grid>
+        </Border>
 
-            <Label Text="{Binding ErrorMessage}"
-                   TextColor="Red"
-                   HorizontalOptions="Center"
-                   IsVisible="{Binding HasError}" />
+      
+        <Border Grid.Row="0" Grid.RowSpan="2"
+                VerticalOptions="Start"
+                HeightRequest="230"
+                Margin="32,96,32,0"
+                BackgroundColor="#F3F7FC"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 28">
+            <Border.Shadow>
+                <Shadow Brush="#0B2E57" Opacity="0.28" Radius="28" Offset="0,14" />
+            </Border.Shadow>
+            <Image Source="login.svg" Aspect="AspectFit" Margin="10" />
+        </Border>
+
+       
+        <VerticalStackLayout Grid.Row="1"
+                             Padding="28,48,28,0"
+                             Spacing="20"
+                             VerticalOptions="Start">
+
+            <VerticalStackLayout Spacing="6">
+                <Label Text="Bienvenido"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       TextColor="#0F2A47"
+                       HorizontalOptions="Center" />
+                <Label Text="Inicia sesión para acceder a tu cuenta"
+                       FontSize="15"
+                       TextColor="#6B7A90"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center" />
+            </VerticalStackLayout>
+
+         
+            <Border HeightRequest="58"
+                    BackgroundColor="White"
+                    Stroke="#D6DEE9"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 29"
+                    IsEnabled="{Binding IsNotBusy}">
+                <Border.Shadow>
+                    <Shadow Brush="#0A6CD1" Opacity="0.20" Radius="18" Offset="0,8" />
+                </Border.Shadow>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SignInCommand}" />
+                </Border.GestureRecognizers>
+
+                <HorizontalStackLayout Spacing="12"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center">
+                    <Image Source="google.svg"
+                           HeightRequest="26" WidthRequest="26"
+                           VerticalOptions="Center" />
+                    <Label Text="Continuar con Google"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#1F2D3D"
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Border>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Color="#0A6CD1"
+                               HeightRequest="28" />
+
+            <Border IsVisible="{Binding HasError}"
+                    BackgroundColor="#FDECEA"
+                    Stroke="#F5C2BD"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="14,10">
+                <Label Text="{Binding ErrorMessage}"
+                       TextColor="#B3261E"
+                       FontSize="13"
+                       HorizontalTextAlignment="Center" />
+            </Border>
         </VerticalStackLayout>
 
-    
-        <VerticalStackLayout Spacing="12" IsVisible="{Binding IsLoggedIn}">
-            <Image Source="{Binding User.PictureUrl}"
-                   HeightRequest="96" WidthRequest="96"
-                   HorizontalOptions="Center" />
-            <Label Text="{Binding User.Name}" FontSize="22" HorizontalOptions="Center" />
-            <Label Text="{Binding User.Email}" HorizontalOptions="Center" />
-            <Button Text="Cerrar sesión" Command="{Binding SignOutCommand}" />
-        </VerticalStackLayout>
-
-    </VerticalStackLayout>
+       
+        <Label Grid.Row="2"
+               Margin="36,0,36,24"
+               FontSize="12"
+               TextColor="#8A97A8"
+               HorizontalTextAlignment="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Al continuar aceptas los " />
+                    <Span Text="Términos de uso" TextColor="#0A6CD1" FontAttributes="Bold" />
+                    <Span Text=" y la " />
+                    <Span Text="Política de privacidad" TextColor="#0A6CD1" FontAttributes="Bold" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </Grid>
 </ContentPage>

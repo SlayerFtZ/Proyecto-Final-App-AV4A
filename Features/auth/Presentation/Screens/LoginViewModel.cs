@@ -1,4 +1,3 @@
-using AppFinalAv4A.Features.auth.Domain.Entities;
 using AppFinalAv4A.Features.auth.Domain.Repositories;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -12,11 +11,6 @@ public partial class LoginViewModel : ObservableObject
     public LoginViewModel(IAuthRepository repository) => _repository = repository;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(IsLoggedIn))]
-    [NotifyPropertyChangedFor(nameof(IsLoggedOut))]
-    AuthGoogle? user;
-
-    [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsNotBusy))]
     bool isBusy;
 
@@ -25,14 +19,14 @@ public partial class LoginViewModel : ObservableObject
     string? errorMessage;
 
     public bool IsNotBusy => !IsBusy;
-    public bool IsLoggedIn => User is not null;
-    public bool IsLoggedOut => User is null;
     public bool HasError => !string.IsNullOrEmpty(ErrorMessage);
 
     [RelayCommand]
     async Task InitializeAsync()
     {
-        User = await _repository.GetCurrentSessionAsync();
+        var session = await _repository.GetCurrentSessionAsync();
+        if (session is not null)
+            await Shell.Current.GoToAsync("//ProfileScreen");
     }
 
     [RelayCommand]
@@ -44,11 +38,12 @@ public partial class LoginViewModel : ObservableObject
         {
             IsBusy = true;
             ErrorMessage = null;
-            User = await _repository.SingInWithGoogleAsync();
+            await _repository.SingInWithGoogleAsync();
+            await Shell.Current.GoToAsync("//ProfileScreen");
         }
         catch (TaskCanceledException)
         {
-        
+    
         }
         catch (Exception ex)
         {
@@ -58,12 +53,5 @@ public partial class LoginViewModel : ObservableObject
         {
             IsBusy = false;
         }
-    }
-
-    [RelayCommand]
-    async Task SignOutAsync()
-    {
-        await _repository.SingOutAsync();
-        User = null;
     }
 }

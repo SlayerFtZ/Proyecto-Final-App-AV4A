@@ -9,6 +9,9 @@
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate auth:LoginScreen}"
-        Route="LoginScreen" />
+        Route="LoginScreen"/>
+    <ShellContent
+        Route="ProfileScreen"
+        ContentTemplate="{DataTemplate auth:ProfileScreen}"/>
 
 </Shell>

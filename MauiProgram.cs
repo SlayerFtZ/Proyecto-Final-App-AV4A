@@ -36,6 +36,8 @@ public static class MauiProgram
 		builder.Services.AddSingleton<IAuthRepository, AuthRepositoryImpl>();
 		builder.Services.AddTransient<LoginViewModel>();
 		builder.Services.AddTransient<LoginScreen>();
+		builder.Services.AddTransient<ProfileViewModel>();
+builder.Services.AddTransient<ProfileScreen>();
 		return builder.Build();
 	}
 }
