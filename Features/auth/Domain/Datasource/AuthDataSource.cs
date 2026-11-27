@@ -6,6 +6,6 @@ namespace AppFinalAv4A.Features.auth.Domain.Datasource
     {
         Task<AuthGoogle>SignInAsync(CancellationToken ct = default);
         Task SignOutAsync();
-        Task<AuthGoogle>GetCurrentSessionAsync();
+        Task<AuthGoogle?> GetCurrentSessionAsync();
     }
 }

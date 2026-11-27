@@ -15,5 +15,8 @@ public static class AuthMapper
         RefreshToken = model.Token.RefreshToken,
         IdToken = model.Token.IdToken,
         ExpiresAt = model.ObtainedAt.AddSeconds(model.Token.ExpiresIn),
+        ApiAccessToken = model.ApiAccessToken,
+        ApiTokenExpiresAt = model.ApiTokenExpiresAt,
+        ApiUserId = model.ApiUserId,
     };
 }

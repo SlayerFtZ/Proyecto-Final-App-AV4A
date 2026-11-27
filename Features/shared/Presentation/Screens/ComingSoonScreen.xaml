@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:AppFinalAv4A.Core.Localization"
+             xmlns:ui="clr-namespace:AppFinalAv4A.Core.Ui"
+             xmlns:vm="clr-namespace:AppFinalAv4A.Features.Shared.Presentation.ViewModels"
+             x:Class="AppFinalAv4A.Features.Shared.Presentation.Screens.ComingSoonScreen"
+             x:DataType="vm:ComingSoonViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource PageBackground}">
+
+    <Grid RowDefinitions="Auto,*" Padding="20,16">
+        <Border WidthRequest="42"
+                HeightRequest="42"
+                HorizontalOptions="Start"
+                BackgroundColor="{StaticResource Surface}"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 21">
+            <Label FontFamily="MaterialSymbols"
+                   Text="{x:Static ui:Icons.Back}"
+                   FontSize="22"
+                   TextColor="{StaticResource Primary}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
+            </Border.GestureRecognizers>
+        </Border>
+
+        <VerticalStackLayout Grid.Row="1"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                             Spacing="12">
+            <Border WidthRequest="88"
+                    HeightRequest="88"
+                    HorizontalOptions="Center"
+                    BackgroundColor="{StaticResource Surface}"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 28">
+                <Label FontFamily="MaterialSymbols"
+                       Text="{Binding Icon}"
+                       FontSize="42"
+                       TextColor="{StaticResource Primary}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+            </Border>
+            <Label Text="{Binding Title}"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource Navy}"
+                   HorizontalOptions="Center"/>
+            <Label Text="{i18n:T 'This section is under construction.'}"
+                   FontSize="14"
+                   TextColor="{StaticResource TextMuted}"
+                   HorizontalTextAlignment="Center"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

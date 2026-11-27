@@ -5,12 +5,28 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
-    <Color x:Key="Primary">#512BD4</Color>
-    <Color x:Key="PrimaryDark">#ac99ea</Color>
+    <!-- ══ Paleta InventarIA (azules) ══ -->
+    <Color x:Key="Primary">#185FA5</Color>            <!-- Azul principal: botones, tarjeta de resumen, pestaña activa -->
+    <Color x:Key="PrimaryDark">#85B7EB</Color>        <!-- Primario en tema oscuro -->
     <Color x:Key="PrimaryDarkText">#242424</Color>
-    <Color x:Key="Secondary">#DFD8F7</Color>
-    <Color x:Key="SecondaryDarkText">#9880e5</Color>
-    <Color x:Key="Tertiary">#2B0B98</Color>
+    <Color x:Key="Secondary">#E6F1FB</Color>
+    <Color x:Key="SecondaryDarkText">#85B7EB</Color>
+    <Color x:Key="Tertiary">#0C447C</Color>           <!-- Primario oscuro -->
+
+    <Color x:Key="Navy">#042C53</Color>               <!-- Títulos y texto principal -->
+    <Color x:Key="PrimaryLight">#B5D4F4</Color>       <!-- Acento claro, bordes de accesos -->
+    <Color x:Key="Surface">#E6F1FB</Color>            <!-- Superficies suaves -->
+    <Color x:Key="PageBackground">#F5F9FE</Color>     <!-- Fondo de pantallas -->
+    <Color x:Key="CardBorder">#D6E6F7</Color>         <!-- Borde de tarjetas -->
+    <Color x:Key="TextMuted">#5F7A96</Color>          <!-- Texto secundario -->
+    <Color x:Key="TabUnselected">#8AA3BC</Color>      <!-- Pestaña inactiva -->
+
+    <Color x:Key="Critical">#A32D2D</Color>           <!-- Alerta crítica -->
+    <Color x:Key="CriticalBackground">#FCEBEB</Color>
+    <Color x:Key="WarningText">#854F0B</Color>        <!-- Alerta de aviso -->
+    <Color x:Key="WarningBackground">#FAEEDA</Color>
+    <Color x:Key="Success">#3B6D11</Color>
+    <Color x:Key="SuccessBackground">#EAF3DE</Color>
 
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
@@ -30,6 +46,8 @@
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
+    <SolidColorBrush x:Key="NavyBrush" Color="{StaticResource Navy}"/>
+    <SolidColorBrush x:Key="PageBackgroundBrush" Color="{StaticResource PageBackground}"/>
     <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
     <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
 

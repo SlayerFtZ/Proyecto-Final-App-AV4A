@@ -1,0 +1,149 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AppFinalAv4A\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Sign in"
+msgstr "Sign in"
+
+msgid "Continue with Google"
+msgstr "Continue with Google"
+
+msgid "Welcome back, {0}"
+msgstr "Welcome back, {0}"
+
+msgid "{0} new message"
+msgid_plural "{0} new messages"
+msgstr[0] "{0} new message"
+msgstr[1] "{0} new messages"
+
+msgid "Welcome"
+msgstr "Welcome"
+
+msgid "Sign in to access your account"
+msgstr "Sign in to access your account"
+
+msgid "Choose Language"
+msgstr "Choose Language"
+
+msgid "You want to learn, and master it"
+msgstr "You want to learn, and master it"
+
+msgid "Continue"
+msgstr "Continue"
+
+msgid "Language"
+msgstr "Language"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Edit profile"
+msgstr "Edit profile"
+
+msgid "Sign out"
+msgstr "Sign out"
+
+msgid "By continuing you accept the"
+msgstr "By continuing you accept the"
+
+msgid "Terms of use"
+msgstr "Terms of use"
+
+msgid "and the"
+msgstr "and the"
+
+msgid "Privacy policy"
+msgstr "Privacy policy"
+
+msgid "Sales today"
+msgstr "Sales today"
+
+msgid "Transactions"
+msgstr "Transactions"
+
+msgid "Alerts"
+msgstr "Alerts"
+
+msgid "Try again"
+msgstr "Try again"
+
+msgid "New sale"
+msgstr "New sale"
+
+msgid "Scan"
+msgstr "Scan"
+
+msgid "Products"
+msgstr "Products"
+
+msgid "Reports"
+msgstr "Reports"
+
+msgid "See all"
+msgstr "See all"
+
+msgid "Show less"
+msgstr "Show less"
+
+msgid "No alerts. Your inventory looks good."
+msgstr "No alerts. Your inventory looks good."
+
+msgid "Top sellers today"
+msgstr "Top sellers today"
+
+msgid "units"
+msgstr "units"
+
+msgid "No sales yet today."
+msgstr "No sales yet today."
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Sales"
+msgstr "Sales"
+
+msgid "Profile"
+msgstr "Profile"
+
+msgid "Coming soon"
+msgstr "Coming soon"
+
+msgid "This section is under construction."
+msgstr "This section is under construction."
+
+msgid "Hello, {0}"
+msgstr "Hello, {0}"
+
+msgid "Couldn't load today's summary."
+msgstr "Couldn't load today's summary."
+
+msgid "Critical"
+msgstr "Critical"
+
+msgid "Warning"
+msgstr "Warning"
+
+msgid "Out of stock · minimum {0}"
+msgstr "Out of stock · minimum {0}"
+
+msgid "Stock: {0} · minimum {1}"
+msgstr "Stock: {0} · minimum {1}"
+
+msgid "Expires today"
+msgstr "Expires today"
+
+msgid "Expired {0} day ago"
+msgid_plural "Expired {0} days ago"
+msgstr[0] "Expired {0} day ago"
+msgstr[1] "Expired {0} days ago"
+
+msgid "Expires in {0} day"
+msgid_plural "Expires in {0} days"
+msgstr[0] "Expires in {0} day"
+msgstr[1] "Expires in {0} days"

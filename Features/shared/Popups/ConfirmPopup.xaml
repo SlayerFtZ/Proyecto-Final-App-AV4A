@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AppFinalAv4A.Features.Shared.Presentation.Popups.ConfirmPopup"
+    BackgroundColor="Transparent">
+
+    <Grid Padding="12">
+        <Border Background="#FFFFFF"
+                Stroke="#E5E7EB"
+                StrokeThickness="1"
+                Padding="5">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="8"/>
+            </Border.StrokeShape>
+
+            <VerticalStackLayout Spacing="16">
+
+               <skia:SKLottieView x:Name="LottieQuestion"
+                   Source="Lottie/question.json"
+                   RepeatCount="-1"
+                   HeightRequest="120"
+                   WidthRequest="120"
+                   BackgroundColor="White"
+                   HorizontalOptions="Center" />
+
+                <Label x:Name="TitleLabel"
+                       Text="¿Cerrar sesión?"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="#111827"
+                       HorizontalTextAlignment="Center"/>
+
+                <Label x:Name="MessageLabel"
+                       Text="¿Seguro que quieres cerrar sesión?"
+                       FontSize="14"
+                       TextColor="#6B7280"
+                       HorizontalTextAlignment="Center"/>
+
+                <Grid ColumnDefinitions="*,*"
+                      ColumnSpacing="12">
+
+                    <Button Grid.Column="0"
+                            Text="Cancelar"
+                            TextColor="#374151"
+                            BackgroundColor="#F3F4F6"
+                            CornerRadius="14"
+                            HeightRequest="48"
+                            Clicked="OnCancelClicked"/>
+
+                    <Button Grid.Column="1"
+                            Text="Cerrar sesión"
+                            TextColor="White"
+                            BackgroundColor="#DC2626"
+                            FontAttributes="Bold"
+                            CornerRadius="14"
+                            HeightRequest="48"
+                            Clicked="OnConfirmClicked"/>
+
+                </Grid>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentView>

@@ -1,4 +1,4 @@
-namespace AppFinalAv4A.Features.auth.Presentation.screens;
+namespace AppFinalAv4A.Features.auth.Presentation.Screens;
 
 public partial class ProfileScreen : ContentPage
 {
@@ -9,10 +9,14 @@ public partial class ProfileScreen : ContentPage
         InitializeComponent();
         BindingContext = _viewModel = viewModel;
     }
+protected override async void OnAppearing()
+{
+    base.OnAppearing();
 
-    protected override async void OnAppearing()
+    if (BindingContext is ProfileViewModel vm)
     {
-        base.OnAppearing();
-        await _viewModel.LoadCommand.ExecuteAsync(null);
+        vm.RefreshLanguage();
+        await vm.LoadCommand.ExecuteAsync(null);
     }
+}
 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:shapes="clr-namespace:Microsoft.Maui.Controls.Shapes;assembly=Microsoft.Maui.Controls"
+             xmlns:i18n="clr-namespace:AppFinalAv4A.Core.Localization"
+             xmlns:vm="clr-namespace:AppFinalAv4A.Features.Language.Screens"
+             x:Class="AppFinalAv4A.Features.Language.Screens.LanguageScreen"
+             x:DataType="vm:LanguageViewModel"
+             x:Name="Page"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,*,Auto" Padding="28,48,28,28">
+
+        <VerticalStackLayout Grid.Row="0" Spacing="4">
+            <Label Text="{i18n:T 'Choose Language'}"
+                   FontSize="22" FontAttributes="Bold"
+                   TextColor="#0F2A47" HorizontalOptions="Center" />
+           
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1" Margin="0,40,0,0"
+                        ItemsSource="{Binding Languages}"
+                        SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2"
+                                 VerticalItemSpacing="32"
+                                 HorizontalItemSpacing="16" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:LanguageOption">
+                    <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.SelectCommand, x:DataType=ContentPage}"
+                                CommandParameter="{Binding .}" />
+                        </VerticalStackLayout.GestureRecognizers>
+
+                        <Border WidthRequest="84" HeightRequest="96"
+                                StrokeThickness="3" Stroke="Transparent"
+                                BackgroundColor="#F3F7FC">
+                            <Border.StrokeShape>
+                                <shapes:Polygon Points="42,0 84,24 84,72 42,96 0,72 0,24" />
+                            </Border.StrokeShape>
+                            <Border.Triggers>
+                                <DataTrigger TargetType="Border"
+                                             Binding="{Binding IsSelected}" Value="True">
+                                    <Setter Property="Stroke" Value="#0A6CD1" />
+                                    <Setter Property="Scale" Value="1.08" />
+                                </DataTrigger>
+                            </Border.Triggers>
+                            <Image Source="{Binding Flag}" Aspect="AspectFill" />
+                        </Border>
+
+                        <Label Text="{Binding Name}" FontSize="13"
+                               TextColor="#1F2D3D" HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="2" HeightRequest="54" CornerRadius="12"
+                Text="{i18n:T 'Continue'}" TextColor="White"
+                FontAttributes="Bold" FontSize="18"
+                Command="{Binding ContinueCommand}">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#1E86E8" Offset="0" />
+                    <GradientStop Color="#2B2FC7" Offset="1" />
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+    </Grid>
+</ContentPage>

@@ -12,4 +12,14 @@ public class AuthGoogle
 
     public bool IsExpired => DateTimeOffset.UtcNow >= ExpiresAt;
 
+    // ── Sesión con la API (JWT propio del backend) ──
+    public string? ApiAccessToken {get; init;}
+    public DateTimeOffset? ApiTokenExpiresAt {get; init;}
+    public int? ApiUserId {get; init;}
+
+    public bool HasValidApiSession =>
+        !string.IsNullOrEmpty(ApiAccessToken)
+        && ApiTokenExpiresAt is { } exp
+        && DateTimeOffset.UtcNow < exp;
+
 }

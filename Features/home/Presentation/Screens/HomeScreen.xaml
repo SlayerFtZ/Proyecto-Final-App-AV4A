@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:i18n="clr-namespace:AppFinalAv4A.Core.Localization"
+             xmlns:ui="clr-namespace:AppFinalAv4A.Core.Ui"
+             xmlns:conv="clr-namespace:AppFinalAv4A.Features.home.Presentation.Converters"
+             xmlns:entities="clr-namespace:AppFinalAv4A.Features.home.Domain.Entities"
+             xmlns:vm="clr-namespace:AppFinalAv4A.Features.home.Presentation.ViewModels"
+             x:Class="AppFinalAv4A.Features.home.Presentation.Screens.HomeScreen"
+             x:DataType="vm:HomeViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource PageBackground}">
+
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource PageBackground}"
+                                   StatusBarStyle="DarkContent"/>
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <conv:SeverityToColorConverter x:Key="SeverityColor"/>
+
+      
+        <Style x:Key="QuickActionBox" TargetType="Border">
+            <Setter Property="HeightRequest" Value="56"/>
+            <Setter Property="WidthRequest" Value="56"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+            <Setter Property="Stroke" Value="{StaticResource PrimaryLight}"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 18"/>
+        </Style>
+        <Style x:Key="QuickActionIcon" TargetType="Label">
+            <Setter Property="FontFamily" Value="MaterialSymbols"/>
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+        <Style x:Key="QuickActionLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextColor" Value="{StaticResource Tertiary}"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,6,0,0"/>
+        </Style>
+        <Style x:Key="SectionTitle" TargetType="Label">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="{StaticResource Navy}"/>
+        </Style>
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+            <Setter Property="Stroke" Value="{StaticResource CardBorder}"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 14"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                 Command="{Binding RefreshCommand}"
+                 RefreshColor="{StaticResource Primary}">
+
+       
+        <CollectionView ItemsSource="{Binding Alerts}"
+                        SelectionMode="None">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="8"/>
+            </CollectionView.ItemsLayout>
+
+          
+            <CollectionView.Header>
+                <VerticalStackLayout Padding="20,20,20,10" Spacing="18">
+
+                 
+                    <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                        <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                            <Label Text="{Binding TodayText}"
+                                   FontSize="13"
+                                   TextColor="{StaticResource TextMuted}"/>
+                            <Label Text="{Binding Greeting}"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource Navy}"
+                                   LineBreakMode="TailTruncation"/>
+                        </VerticalStackLayout>
+
+                        <Grid Grid.Column="1" WidthRequest="42" HeightRequest="42" VerticalOptions="Center">
+                            <Border BackgroundColor="{StaticResource Surface}"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 21">
+                                <Label FontFamily="MaterialSymbols"
+                                       Text="{x:Static ui:Icons.Notifications}"
+                                       FontSize="22"
+                                       TextColor="{StaticResource Primary}"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Border>
+                            <Ellipse Fill="{StaticResource Critical}"
+                                     WidthRequest="9"
+                                     HeightRequest="9"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="Start"
+                                     Margin="0,9,10,0"
+                                     IsVisible="{Binding HasAlerts}"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleAlertsCommand}"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+
+                        <Border Grid.Column="2"
+                                WidthRequest="42"
+                                HeightRequest="42"
+                                VerticalOptions="Center"
+                                BackgroundColor="{StaticResource Primary}"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 21">
+                            <Grid>
+                                <Label Text="{Binding Initials}"
+                                       FontSize="15"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource White}"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                               
+                                <Image Source="{Binding PictureUrl}" Aspect="AspectFill"/>
+                            </Grid>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenProfileCommand}"/>
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </Grid>
+
+                   
+                    <Border BackgroundColor="{StaticResource Primary}"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 22"
+                            Padding="20,18">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="{i18n:T 'Sales today'}"
+                                   FontSize="13"
+                                   TextColor="{StaticResource PrimaryLight}"/>
+                            <Label Text="{Binding RevenueText}"
+                                   FontSize="32"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource White}"/>
+
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,12,0,0">
+                                <Border BackgroundColor="{StaticResource Tertiary}"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 14"
+                                        Padding="12,10">
+                                    <VerticalStackLayout Spacing="2">
+                                        <Label Text="{i18n:T 'Transactions'}"
+                                               FontSize="12"
+                                               TextColor="{StaticResource PrimaryLight}"/>
+                                        <Label Text="{Binding SalesCount}"
+                                               FontSize="18"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource White}"/>
+                                    </VerticalStackLayout>
+                                </Border>
+                                <Border Grid.Column="1"
+                                        BackgroundColor="{StaticResource Tertiary}"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 14"
+                                        Padding="12,10">
+                                    <VerticalStackLayout Spacing="2">
+                                        <Label Text="{i18n:T 'Alerts'}"
+                                               FontSize="12"
+                                               TextColor="{StaticResource PrimaryLight}"/>
+                                        <Label Text="{Binding AlertsCount}"
+                                               FontSize="18"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource White}"/>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+
+                   
+                    <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                       IsVisible="{Binding IsBusy}"
+                                       Color="{StaticResource Primary}"
+                                       HeightRequest="28"/>
+
+                 
+                    <Border IsVisible="{Binding HasError}"
+                            BackgroundColor="{StaticResource CriticalBackground}"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 14"
+                            Padding="14,12">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                            <Label FontFamily="MaterialSymbols"
+                                   Text="{x:Static ui:Icons.CloudOff}"
+                                   FontSize="22"
+                                   TextColor="{StaticResource Critical}"
+                                   VerticalOptions="Center"/>
+                            <Label Grid.Column="1"
+                                   Text="{Binding ErrorMessage}"
+                                   FontSize="13"
+                                   TextColor="{StaticResource Critical}"
+                                   VerticalOptions="Center"/>
+                            <Button Grid.Column="2"
+                                    Text="{i18n:T 'Try again'}"
+                                    Command="{Binding LoadCommand}"
+                                    BackgroundColor="{StaticResource White}"
+                                    TextColor="{StaticResource Critical}"
+                                    FontSize="13"
+                                    CornerRadius="10"
+                                    Padding="12,0"
+                                    HeightRequest="36"/>
+                        </Grid>
+                    </Border>
+
+                 
+                    <Grid ColumnDefinitions="*,*,*,*">
+                        <VerticalStackLayout Grid.Column="0">
+                            <Border Style="{StaticResource QuickActionBox}">
+                                <Label Style="{StaticResource QuickActionIcon}" Text="{x:Static ui:Icons.NewSale}"/>
+                            </Border>
+                            <Label Style="{StaticResource QuickActionLabel}" Text="{i18n:T 'New sale'}"/>
+                            <VerticalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenNewSaleCommand}"/>
+                            </VerticalStackLayout.GestureRecognizers>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1">
+                            <Border Style="{StaticResource QuickActionBox}">
+                                <Label Style="{StaticResource QuickActionIcon}" Text="{x:Static ui:Icons.Scan}"/>
+                            </Border>
+                            <Label Style="{StaticResource QuickActionLabel}" Text="{i18n:T 'Scan'}"/>
+                            <VerticalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenScannerCommand}"/>
+                            </VerticalStackLayout.GestureRecognizers>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="2">
+                            <Border Style="{StaticResource QuickActionBox}">
+                                <Label Style="{StaticResource QuickActionIcon}" Text="{x:Static ui:Icons.Products}"/>
+                            </Border>
+                            <Label Style="{StaticResource QuickActionLabel}" Text="{i18n:T 'Products'}"/>
+                            <VerticalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenProductsCommand}"/>
+                            </VerticalStackLayout.GestureRecognizers>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="3">
+                            <Border Style="{StaticResource QuickActionBox}">
+                                <Label Style="{StaticResource QuickActionIcon}" Text="{x:Static ui:Icons.Reports}"/>
+                            </Border>
+                            <Label Style="{StaticResource QuickActionLabel}" Text="{i18n:T 'Reports'}"/>
+                            <VerticalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenReportsCommand}"/>
+                            </VerticalStackLayout.GestureRecognizers>
+                        </VerticalStackLayout>
+                    </Grid>
+
+               
+                    <Grid ColumnDefinitions="*,Auto" Margin="0,4,0,0">
+                        <Label Text="{i18n:T 'Alerts'}" Style="{StaticResource SectionTitle}"/>
+                        <Label Grid.Column="1"
+                               Text="{Binding SeeAllText}"
+                               FontSize="13"
+                               TextColor="{StaticResource Primary}"
+                               VerticalOptions="Center"
+                               IsVisible="{Binding HasMoreAlerts}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToggleAlertsCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
+            
+                    <Border Style="{StaticResource Card}"
+                            IsVisible="{Binding HasNoAlerts}"
+                            Padding="14,12">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label FontFamily="MaterialSymbols"
+                                   Text="{x:Static ui:Icons.CheckCircle}"
+                                   FontSize="22"
+                                   TextColor="{StaticResource Success}"
+                                   VerticalOptions="Center"/>
+                            <Label Text="{i18n:T 'No alerts. Your inventory looks good.'}"
+                                   FontSize="13"
+                                   TextColor="{StaticResource TextMuted}"
+                                   VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </CollectionView.Header>
+
+           
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="entities:AlertItem">
+                    <Border Style="{StaticResource Card}" Margin="20,0" Padding="12,10">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                            <Border WidthRequest="38"
+                                    HeightRequest="38"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 11"
+                                    BackgroundColor="{Binding Severity, Converter={StaticResource SeverityColor}, ConverterParameter=bg}">
+                                <Label FontFamily="MaterialSymbols"
+                                       Text="{Binding Icon}"
+                                       FontSize="20"
+                                       TextColor="{Binding Severity, Converter={StaticResource SeverityColor}, ConverterParameter=fg}"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Border>
+
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="1">
+                                <Label Text="{Binding ProductName}"
+                                       FontSize="14"
+                                       TextColor="{StaticResource Navy}"
+                                       LineBreakMode="TailTruncation"/>
+                                <Label Text="{Binding Detail}"
+                                       FontSize="12"
+                                       TextColor="{StaticResource TextMuted}"/>
+                            </VerticalStackLayout>
+
+                            <Border Grid.Column="2"
+                                    VerticalOptions="Center"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 10"
+                                    Padding="9,3"
+                                    BackgroundColor="{Binding Severity, Converter={StaticResource SeverityColor}, ConverterParameter=bg}">
+                                <Label Text="{Binding SeverityLabel}"
+                                       FontSize="11"
+                                       TextColor="{Binding Severity, Converter={StaticResource SeverityColor}, ConverterParameter=fg}"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.Footer>
+                <VerticalStackLayout Padding="20,18,20,28" Spacing="10">
+                    <Label Text="{i18n:T 'Top sellers today'}" Style="{StaticResource SectionTitle}"/>
+
+                    <Border Style="{StaticResource Card}"
+                            Padding="14,4"
+                            IsVisible="{Binding HasTopSellers}">
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding TopSellers}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="entities:TopSeller">
+                                    <Grid ColumnDefinitions="28,*,Auto" Padding="0,10">
+                                        <Label Text="{Binding Rank}"
+                                               FontSize="13"
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource Primary}"
+                                               VerticalOptions="Center"/>
+                                        <Label Grid.Column="1"
+                                               Text="{Binding Name}"
+                                               FontSize="14"
+                                               TextColor="{StaticResource Navy}"
+                                               LineBreakMode="TailTruncation"
+                                               VerticalOptions="Center"/>
+                                        <Label Grid.Column="2"
+                                               FontSize="13"
+                                               TextColor="{StaticResource TextMuted}"
+                                               VerticalOptions="Center">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding UnitsSold}"/>
+                                                    <Span Text=" "/>
+                                                    <Span Text="{i18n:T 'units'}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Style="{StaticResource Card}"
+                            Padding="14,12"
+                            IsVisible="{Binding HasNoTopSellers}">
+                        <Label Text="{i18n:T 'No sales yet today.'}"
+                               FontSize="13"
+                               TextColor="{StaticResource TextMuted}"/>
+                    </Border>
+                </VerticalStackLayout>
+            </CollectionView.Footer>
+        </CollectionView>
+    </RefreshView>
+</ContentPage>

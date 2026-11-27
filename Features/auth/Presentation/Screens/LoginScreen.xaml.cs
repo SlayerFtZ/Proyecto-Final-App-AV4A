@@ -1,4 +1,4 @@
-namespace AppFinalAv4A.Features.auth.Presentation.screens;
+namespace AppFinalAv4A.Features.auth.Presentation.Screens;
 
 public partial class LoginScreen : ContentPage
 {

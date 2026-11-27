@@ -2,6 +2,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Security.Cryptography;
 using System.Text;
+using AppFinalAv4A.Core.Network;
 using AppFinalAv4A.Features.auth.Domain.Datasource;
 using AppFinalAv4A.Features.auth.Domain.Entities;
 using AppFinalAv4A.Features.auth.Infrastructure.Mappers;
@@ -14,11 +15,13 @@ public class AuthDataSourceImpl : IAuthDataSource
 {
     readonly HttpClient _http;
     readonly TokenStorageService _storage;
+    readonly IApiClient _api;
 
-    public AuthDataSourceImpl(HttpClient http, TokenStorageService storage)
+    public AuthDataSourceImpl(HttpClient http, TokenStorageService storage, IApiClient api)
     {
         _http = http;
         _storage = storage;
+        _api = api;
     }
 
     public async Task<AuthGoogle> SignInAsync(CancellationToken ct = default)
@@ -57,10 +60,19 @@ public class AuthDataSourceImpl : IAuthDataSource
     
         var token = await ExchangeCodeAsync(code, codeVerifier, ct);
 
-    
         var user = await GetUserInfoAsync(token.AccessToken, ct);
 
-        var model = new AuthModel { Token = token, UserProfile = user };
+        // Registro / login en el backend: cambia el id_token de Google por el JWT de la API.
+        var apiAuth = await SignInToApiAsync(token.IdToken, ct);
+
+        var model = new AuthModel
+        {
+            Token = token,
+            UserProfile = user,
+            ApiAccessToken = apiAuth.AccessToken,
+            ApiTokenExpiresAt = apiAuth.ExpiresAt,
+            ApiUserId = apiAuth.User?.Id
+        };
         await _storage.SaveAsync(model);
 
         return AuthMapper.ToEntity(model);
@@ -69,7 +81,19 @@ public class AuthDataSourceImpl : IAuthDataSource
     public async Task<AuthGoogle?> GetCurrentSessionAsync()
     {
         var model = await _storage.LoadAsync();
-        return model is null ? null : AuthMapper.ToEntity(model);
+        if (model is null)
+            return null;
+
+        var session = AuthMapper.ToEntity(model);
+
+        // Sin JWT de la API (sesión anterior a la integración) o ya vencido: pedir login de nuevo.
+        if (!session.HasValidApiSession)
+        {
+            _storage.Clear();
+            return null;
+        }
+
+        return session;
     }
 
     public Task SignOutAsync()
@@ -78,6 +102,18 @@ public class AuthDataSourceImpl : IAuthDataSource
         return Task.CompletedTask;
     }
 
+
+    async Task<ApiAuthResponseModel> SignInToApiAsync(string? idToken, CancellationToken ct)
+    {
+        if (string.IsNullOrWhiteSpace(idToken))
+            throw new InvalidOperationException("Google no devolvió el id_token. Revisa que el scope incluya 'openid'.");
+
+        return await _api.PostAsync<GoogleLoginRequestModel, ApiAuthResponseModel>(
+            "api/auth/google",
+            new GoogleLoginRequestModel { IdToken = idToken },
+            authorize: false,
+            ct);
+    }
 
     async Task<TokenModelAuth> ExchangeCodeAsync(string code, string codeVerifier, CancellationToken ct)
     {

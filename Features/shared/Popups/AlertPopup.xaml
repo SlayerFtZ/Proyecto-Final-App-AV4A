@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AppFinalAv4A.Features.Shared.Presentation.Popups.AlertPopup"
+    BackgroundColor="Transparent">
+
+    <Grid Padding="12">
+        <Border Background="#FFFFFF"
+                Stroke="#E5E7EB"
+                StrokeThickness="1"
+                Padding="24"
+                HorizontalOptions="Fill"
+                VerticalOptions="Center">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="24"/>
+            </Border.StrokeShape>
+
+            <VerticalStackLayout Spacing="14"
+                                 HorizontalOptions="Fill"
+                                 VerticalOptions="Center">
+
+                <Label x:Name="IconLabel"
+                       FontSize="48"
+                       HorizontalTextAlignment="Center"/>
+
+                <Label x:Name="TitleLabel"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="#111827"
+                       HorizontalTextAlignment="Center"/>
+
+                <Label x:Name="MessageLabel"
+                       FontSize="14"
+                       TextColor="#6B7280"
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap"/>
+
+                <Button Text="Entendido"
+                        TextColor="White"
+                        BackgroundColor="#2563EB"
+                        FontAttributes="Bold"
+                        CornerRadius="14"
+                        HeightRequest="48"
+                        Clicked="OnCloseClicked"/>
+
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentView>

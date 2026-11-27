@@ -2,7 +2,7 @@ using AppFinalAv4A.Features.auth.Domain.Repositories;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace AppFinalAv4A.Features.auth.Presentation.screens;
+namespace AppFinalAv4A.Features.auth.Presentation.Screens;
 
 public partial class LoginViewModel : ObservableObject
 {
@@ -26,7 +26,7 @@ public partial class LoginViewModel : ObservableObject
     {
         var session = await _repository.GetCurrentSessionAsync();
         if (session is not null)
-            await Shell.Current.GoToAsync("//ProfileScreen");
+            await Shell.Current.GoToAsync("//HomeScreen");
     }
 
     [RelayCommand]
@@ -39,7 +39,7 @@ public partial class LoginViewModel : ObservableObject
             IsBusy = true;
             ErrorMessage = null;
             await _repository.SingInWithGoogleAsync();
-            await Shell.Current.GoToAsync("//ProfileScreen");
+            await Shell.Current.GoToAsync("//HomeScreen");
         }
         catch (TaskCanceledException)
         {

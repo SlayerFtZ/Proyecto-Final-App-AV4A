@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Pestaña temporal: se reemplaza cuando se implemente la feature "products". -->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:i18n="clr-namespace:AppFinalAv4A.Core.Localization"
+             xmlns:ui="clr-namespace:AppFinalAv4A.Core.Ui"
+             x:Class="AppFinalAv4A.Features.products.Presentation.Screens.ProductsScreen"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{StaticResource PageBackground}">
+
+    <VerticalStackLayout VerticalOptions="Center"
+                         HorizontalOptions="Center"
+                         Padding="24"
+                         Spacing="12">
+        <Border WidthRequest="88"
+                HeightRequest="88"
+                HorizontalOptions="Center"
+                BackgroundColor="{StaticResource Surface}"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 28">
+            <Label FontFamily="MaterialSymbols"
+                   Text="{x:Static ui:Icons.Products}"
+                   FontSize="42"
+                   TextColor="{StaticResource Primary}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+        </Border>
+        <Label Text="{i18n:T 'Products'}"
+               FontSize="22"
+               FontAttributes="Bold"
+               TextColor="{StaticResource Navy}"
+               HorizontalOptions="Center"/>
+        <Label Text="{i18n:T 'This section is under construction.'}"
+               FontSize="14"
+               TextColor="{StaticResource TextMuted}"
+               HorizontalTextAlignment="Center"/>
+    </VerticalStackLayout>
+</ContentPage>

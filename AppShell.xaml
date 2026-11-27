@@ -3,15 +3,53 @@
     x:Class="AppFinalAv4A.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:auth="clr-namespace:AppFinalAv4A.Features.auth.Presentation.screens"
+    xmlns:i18n="clr-namespace:AppFinalAv4A.Core.Localization"
+    xmlns:ui="clr-namespace:AppFinalAv4A.Core.Ui"
+    xmlns:auth="clr-namespace:AppFinalAv4A.Features.auth.Presentation.Screens"
+    xmlns:home="clr-namespace:AppFinalAv4A.Features.home.Presentation.Screens"
+    xmlns:products="clr-namespace:AppFinalAv4A.Features.products.Presentation.Screens"
+    xmlns:sales="clr-namespace:AppFinalAv4A.Features.sales.Presentation.Screens"
     Shell.FlyoutBehavior="Disabled">
 
+    <!-- Login: fuera de la barra de pestañas -->
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate auth:LoginScreen}"
         Route="LoginScreen"/>
-    <ShellContent
-        Route="ProfileScreen"
-        ContentTemplate="{DataTemplate auth:ProfileScreen}"/>
+
+    <!-- App principal: barra de pestañas inferior -->
+    <TabBar Route="main">
+        <ShellContent Title="{i18n:T 'Home'}"
+                      Route="HomeScreen"
+                      ContentTemplate="{DataTemplate home:HomeScreen}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialSymbols" Glyph="{x:Static ui:Icons.Home}" Size="24"/>
+            </ShellContent.Icon>
+        </ShellContent>
+
+        <ShellContent Title="{i18n:T 'Products'}"
+                      Route="ProductsScreen"
+                      ContentTemplate="{DataTemplate products:ProductsScreen}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialSymbols" Glyph="{x:Static ui:Icons.Products}" Size="24"/>
+            </ShellContent.Icon>
+        </ShellContent>
+
+        <ShellContent Title="{i18n:T 'Sales'}"
+                      Route="SalesScreen"
+                      ContentTemplate="{DataTemplate sales:SalesScreen}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialSymbols" Glyph="{x:Static ui:Icons.Sales}" Size="24"/>
+            </ShellContent.Icon>
+        </ShellContent>
+
+        <ShellContent Title="{i18n:T 'Profile'}"
+                      Route="ProfileScreen"
+                      ContentTemplate="{DataTemplate auth:ProfileScreen}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="MaterialSymbols" Glyph="{x:Static ui:Icons.Profile}" Size="24"/>
+            </ShellContent.Icon>
+        </ShellContent>
+    </TabBar>
 
 </Shell>

@@ -1,0 +1,149 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AppFinalAv4A\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Sign in"
+msgstr "Iniciar sesión"
+
+msgid "Continue with Google"
+msgstr "Continuar con Google"
+
+msgid "Welcome back, {0}"
+msgstr "Bienvenido de nuevo, {0}"
+
+msgid "{0} new message"
+msgid_plural "{0} new messages"
+msgstr[0] "{0} mensaje nuevo"
+msgstr[1] "{0} mensajes nuevos"
+
+msgid "Welcome"
+msgstr "Bienvenido"
+
+msgid "Sign in to access your account"
+msgstr "Inicia sesión para acceder a tu cuenta"
+
+msgid "Choose Language"
+msgstr "Elige el idioma"
+
+msgid "You want to learn, and master it"
+msgstr "Que quieres aprender y dominar"
+
+msgid "Continue"
+msgstr "Continuar"
+
+msgid "Language"
+msgstr "Idioma"
+
+msgid "Notifications"
+msgstr "Notificaciones"
+
+msgid "Edit profile"
+msgstr "Editar perfil"
+
+msgid "Sign out"
+msgstr "Cerrar sesión"
+
+msgid "By continuing you accept the"
+msgstr "Al continuar aceptas los"
+
+msgid "Terms of use"
+msgstr "Términos de uso"
+
+msgid "and the"
+msgstr "y la"
+
+msgid "Privacy policy"
+msgstr "Política de privacidad"
+
+msgid "Sales today"
+msgstr "Ventas de hoy"
+
+msgid "Transactions"
+msgstr "Transacciones"
+
+msgid "Alerts"
+msgstr "Alertas"
+
+msgid "Try again"
+msgstr "Reintentar"
+
+msgid "New sale"
+msgstr "Nueva venta"
+
+msgid "Scan"
+msgstr "Escanear"
+
+msgid "Products"
+msgstr "Productos"
+
+msgid "Reports"
+msgstr "Reportes"
+
+msgid "See all"
+msgstr "Ver todas"
+
+msgid "Show less"
+msgstr "Ver menos"
+
+msgid "No alerts. Your inventory looks good."
+msgstr "Sin alertas. Tu inventario está en orden."
+
+msgid "Top sellers today"
+msgstr "Más vendidos hoy"
+
+msgid "units"
+msgstr "uds"
+
+msgid "No sales yet today."
+msgstr "Aún no hay ventas hoy."
+
+msgid "Home"
+msgstr "Inicio"
+
+msgid "Sales"
+msgstr "Ventas"
+
+msgid "Profile"
+msgstr "Perfil"
+
+msgid "Coming soon"
+msgstr "Próximamente"
+
+msgid "This section is under construction."
+msgstr "Esta sección está en construcción."
+
+msgid "Hello, {0}"
+msgstr "Hola, {0}"
+
+msgid "Couldn't load today's summary."
+msgstr "No se pudo cargar el resumen del día."
+
+msgid "Critical"
+msgstr "Crítico"
+
+msgid "Warning"
+msgstr "Aviso"
+
+msgid "Out of stock · minimum {0}"
+msgstr "Sin stock · mínimo {0}"
+
+msgid "Stock: {0} · minimum {1}"
+msgstr "Stock: {0} · mínimo {1}"
+
+msgid "Expires today"
+msgstr "Caduca hoy"
+
+msgid "Expired {0} day ago"
+msgid_plural "Expired {0} days ago"
+msgstr[0] "Venció hace {0} día"
+msgstr[1] "Venció hace {0} días"
+
+msgid "Expires in {0} day"
+msgid_plural "Expires in {0} days"
+msgstr[0] "Caduca en {0} día"
+msgstr[1] "Caduca en {0} días"
